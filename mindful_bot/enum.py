@@ -1,3 +1,4 @@
+"""Define enums to be used throughout this project."""
 import enum
 
 

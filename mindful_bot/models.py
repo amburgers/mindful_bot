@@ -1,3 +1,4 @@
+"""Define each sqlalchemy model used for this project."""
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.types import Enum
 

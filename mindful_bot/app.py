@@ -1,7 +1,9 @@
+"""Initialize the flask app and setup its plugins."""
 import os
 
 from flask import Flask
 
+from .commands import seed_data_bp
 from .config import DATABASE_URI
 from .plugins import db, migrate
 
@@ -31,9 +33,10 @@ def create_app(test_config=None):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # a simple page that says hello
-    @app.route('/hello')
+    @app.route('/')
     def hello():
         return 'Hello, today is a great day to be mindful!'
+    
+    app.register_blueprint(seed_data_bp)
 
     return app
