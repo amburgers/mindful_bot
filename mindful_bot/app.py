@@ -2,6 +2,9 @@ import os
 
 from flask import Flask
 
+from .config import DATABASE_URI
+from .plugins import db, migrate
+
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -23,9 +26,14 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # DB setup
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
+    db.init_app(app)
+    migrate.init_app(app, db)
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        return 'Hello, Turd!'
+        return 'Hello, today is a great day to be mindful!'
 
     return app
