@@ -22,6 +22,9 @@ LOGGING_CONFIG = {
         },
     },
     "handlers": {
-        "console": {"class": "logging.StreamHandler", "formatter": "standard"}
+        "console": {"class": "logging.StreamHandler", "formatter": "standard", "level": "DEBUG"}
     },
+    "loggers": {
+        "": {"handlers": ["console"]}
+    }
 }

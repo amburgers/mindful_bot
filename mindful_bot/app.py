@@ -6,6 +6,7 @@ from flask import Flask
 from .commands import seed_data_bp
 from .config import DATABASE_URI
 from .plugins import db, migrate
+from .routes import requestbp
 
 
 def create_app(test_config=None):
@@ -33,10 +34,7 @@ def create_app(test_config=None):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    @app.route('/')
-    def hello():
-        return 'Hello, today is a great day to be mindful!'
-    
     app.register_blueprint(seed_data_bp)
+    app.register_blueprint(requestbp)
 
     return app

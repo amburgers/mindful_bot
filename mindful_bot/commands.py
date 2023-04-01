@@ -1,3 +1,4 @@
+"""Management commands. Must be registered with the flask app to be called from command line."""
 from flask import Blueprint
 
 from .plugins import db

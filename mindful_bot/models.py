@@ -25,6 +25,12 @@ class Video(BaseModel):
     type = db.Column(Enum(VideoType), nullable=False)
     duration_seconds = db.Column(db.Integer)
 
+    def get_slack_msg(self):
+        msg = f"Take a short break to follow along with this mindfulness video:\n\n{self.url}"
+        if self.type == VideoType.AMBIANCE:
+            msg = f"Enjoy this ambiance in the background while you work today:\n\n{self.url}"
+        return msg
+    
 
 class MindfulText(BaseModel):
     """Model storing mindful text such as words of affirmation and mantras."""
@@ -32,3 +38,14 @@ class MindfulText(BaseModel):
     type = db.Column(Enum(MindfulTextType), nullable=False)
     is_quote = db.Column(db.Boolean, default=False)
     author = db.Column(db.String)
+
+    def get_slack_msg(self):
+        msg = self.content
+        if self.type == MindfulTextType.MANTRA:
+            msg = (
+                "Take a few minutes, get into a comfortable position, close your eyes"
+                "or settle your gaze, and repeat this phrase:\n\n"
+            ) + msg
+        elif self.type == MindfulTextType.REFLECTION:
+            msg = "Take a few minutes to reflect. Here's a prompt to get you started:\n\n" + msg
+        return msg
