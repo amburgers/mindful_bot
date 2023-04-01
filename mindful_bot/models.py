@@ -44,7 +44,7 @@ class MindfulText(BaseModel):
         if self.type == MindfulTextType.MANTRA:
             msg = (
                 "Take a few minutes, get into a comfortable position, close your eyes"
-                "or settle your gaze, and repeat this phrase:\n\n"
+                " or settle your gaze, and repeat this phrase:\n\n"
             ) + msg
         elif self.type == MindfulTextType.REFLECTION:
             msg = "Take a few minutes to reflect. Here's a prompt to get you started:\n\n" + msg
